@@ -1,0 +1,49 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:exam.Views"
+        xmlns:Model="clr-namespace:exam.Model" x:Class="exam.Views.ClientsList"
+        mc:Ignorable="d"
+        Title="Алёна" Height="450" Width="800" Loaded="Window_Loaded" Icon="/exam;component/Assets/beauty_logo.png">
+    <Window.Resources>
+        <CollectionViewSource x:Key="clientViewSource" d:DesignSource="{d:DesignInstance {x:Type Model:Client}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource clientViewSource}">
+
+        <DataGrid x:Name="clientDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="birthdayColumn" Width="Auto" Header="Birthday">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Birthday, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="emailColumn" Width="Auto" Header="Email" Binding="{Binding Email}"/>
+                <DataGridTextColumn x:Name="firstNameColumn" Width="Auto" Header="First Name" Binding="{Binding FirstName}"/>
+                <DataGridTemplateColumn x:Name="genderColumn" Width="Auto" Header="Gender">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Gender.Name}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTextColumn x:Name="genderCodeColumn" Width="SizeToHeader" Header="Gender Code" Binding="{Binding GenderCode}"/>-->
+                <DataGridTextColumn x:Name="lastNameColumn" Width="Auto" Header="Last Name" Binding="{Binding LastName}"/>
+                <DataGridTextColumn x:Name="patronymicColumn" Width="Auto" Header="Patronymic" Binding="{Binding Patronymic}"/>
+                <DataGridTextColumn x:Name="phoneColumn" Width="Auto" Header="Phone" Binding="{Binding Phone}"/>
+                <DataGridTextColumn x:Name="photoPathColumn" Width="Auto" Header="Photo Path" Binding="{Binding PhotoPath}"/>
+                <DataGridTemplateColumn x:Name="registrationDateColumn" Width="Auto" Header="Registration Date">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding RegistrationDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
